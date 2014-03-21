@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Morphist 1.0.0 Example / Demo</title>
+        <meta name="description" content="A simple jQuery slider / slideshow / carousel plugin for child objects powered by Animate.css and inspired by a Dota 2 hero, Morphling.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="bower_components/animate.css/animate.min.css">
+        <link rel="stylesheet" href="dist/morphist.css">
+    </head>
+    <body>
+        <div style="text-align:center">
+            I am a...
+            <ul id="js-rotating">
+                <li>So Simple</li>
+                <li>Very Doge</li>
+                <li>Much Wow</li>
+                <li>Such Cool</li>
+            </ul>
+            ...child object rotator.
+        </div>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="bower_components/jquery/jquery.min.js"><\/script>')</script>
+        <script src="dist/morphist.js"></script>
+        <script>
+            $("#js-rotating").Morphist({
+                animateIn: 'tada',
+                animateOut: 'bounceOut'
+            });
+        </script>
+    </body>
+</html>
