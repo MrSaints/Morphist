@@ -1393,16 +1393,3 @@
     }
   }
 })();
-
-$.getJSON("http://twitcher.steer.me/user_timeline/iamdevloper?key=kc2tcvkc", function (data) {
-    $tweets = '';
-    for (var i = data.length - 1; i >= 0; i--) {
-        $tweets += '<li><h3 class="twitter-tweet">' + twttr.txt.autoLinkWithJSON(data[i].text, data[i].entities) + '</h3>';
-        $tweets += '<h4 class="twitter-posted">' + moment(data[i].created_at).fromNow() + '</h4></li>';
-    };
-    $('#js-twitter').html($tweets).Morphist({
-        animateIn: "fadeInLeft",
-        animateOut: "lightSpeedOut",
-        speed: 3500
-    });
-});

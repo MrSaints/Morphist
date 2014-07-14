@@ -9,38 +9,79 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link href="//brick.a.ssl.fastly.net/Clear+Sans:400,700,300" rel="stylesheet">
-        <link href="//yui.yahooapis.com/pure/0.5.0-rc-1/pure-min.css" rel="stylesheet">
+        <link href="//yui.yahooapis.com/pure/0.5.0/pure-min.css" rel="stylesheet">
         <!--[if lte IE 8]>
-            <link rel="stylesheet" href="//yui.yahooapis.com/pure/0.5.0-rc-1/grids-responsive-old-ie-min.css">
+            <link rel="stylesheet" href="//yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
         <![endif]-->
         <!--[if gt IE 8]><!-->
-            <link rel="stylesheet" href="//yui.yahooapis.com/pure/0.5.0-rc-1/grids-responsive-min.css">
+            <link rel="stylesheet" href="//yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
         <!--<![endif]-->
 
-        <link href="//cdn.jsdelivr.net/animatecss/3.1.0/animate.min.css" rel="stylesheet">
+        <link href="//cdn.jsdelivr.net/animatecss/3.1.1/animate.min.css" rel="stylesheet">
         <link href="assets/css/morphist.css" rel="stylesheet">
         <link href="assets/css/style.css" rel="stylesheet">
         <link rel="shortcut icon" href="favicon.ico">
 
         <script src="//cdn.jsdelivr.net/modernizr/2.8.2/modernizr.min.js"></script>
+
+        <script>
+            Modernizr.load([
+                {
+                    load: '//cdn.jsdelivr.net/jquery/2.1.1/jquery.min.js',
+                    complete: function () {
+                        if (!window.jQuery) {
+                            Modernizr.load('assets/js/jquery.js');
+                        }
+                    }
+                },
+                {
+                    load: [
+                        '//cdn.jsdelivr.net/momentjs/2.6.0/moment.min.js',
+                        'assets/js/morphist.js',
+                        'assets/js/twitter.js'
+                    ],
+                    complete: function () {
+                        $.getJSON("http://twitcher.steer.me/user_timeline/iamdevloper?key=kc2tcvkc", function (data) {
+                            $tweets = '';
+                            for (var i = data.length - 1; i >= 0; i--) {
+                                $tweets += '<li><h3 class="twitter-tweet">' + twttr.txt.autoLinkWithJSON(data[i].text, data[i].entities) + '</h3>';
+                                $tweets += '<h4 class="twitter-posted">' + moment(data[i].created_at).fromNow() + '</h4></li>';
+                            };
+                            $('#js-twitter').html($tweets).Morphist({
+                                animateIn: "fadeInLeft",
+                                animateOut: "lightSpeedOut",
+                                speed: 3500
+                            });
+                        });
+                    }
+                },
+                {
+                    load: 'assets/js/prism.js',
+                    complete: function () {
+                        Prism.highlightAll();
+                    }
+                }
+            ]);
+        </script>
     </head>
+
     <body>
         <header class="header">
             <div class="header-menu pure-menu pure-menu-open pure-menu-horizontal pure-menu-fixed">
-                <a href="/" class="pure-menu-heading">Morphist</a>
+                <a href="/" title="Home" class="pure-menu-heading">Morphist</a>
 
                 <ul class="header-nav">
                     <li><a href="#getstarted">Get Started</a></li>
-                    <li><a href="http://morphext.fyianlai.com">Morphext</a></li>
-                    <li><a href="//github.com/MrSaints/Morphist">Source</a></li>
+                    <li><a href="//github.com/MrSaints/Morphist#morphist" title="README">Docs</a></li>
                     <li><a href="//github.com/MrSaints/Morphist/releases">Releases</a></li>
+                    <li><a href="http://morphext.fyianlai.com" title="The simplest text rotator">Morphext</a></li>
                 </ul>
             </div>
         </header>
 
         <div class="splash animated flipInX">
             <h1 class="splash-title">Morphing + List = <i>Morphist</i></h1>
-            <h3 class="splash-subtitle">The simplest <abbr title="Slider / Slideshow / Carousel">object rotator</abbr> powered by jQuery and Animate.css</h3>
+            <h3 class="splash-subtitle">The simplest <abbr title="Lightweight slider / slideshow / carousel">object rotator</abbr> powered by jQuery and Animate.css</h3>
             <a class="pure-button pure-button-primary" href="//github.com/MrSaints/Morphist/archive/1.0.0.zip">Download (v1.0.0)</a>
             <a class="pure-button" href="//github.com/MrSaints/Morphist">Source (GitHub)</a>
         </div>
@@ -51,22 +92,22 @@
                     <div class="box">
                         <h2 class="block-title">Installation</h2>
 
-                        <h5>Via <a href="http://bower.io/" title="A package manager for the web">Bower</a>:</h5>
-                        <pre class="code"><code>bower install Morphist --save</code></pre>
+                        <h5>1. <a href="//github.com/MrSaints/Morphist/archive/2.0.0.zip">Direct download link</a> or via <a href="http://bower.io/" title="A package manager for the web">Bower</a>:</h5>
+                        <pre><code class="language-bash">bower install Morphist --save</code></pre>
 
-                        <h5>Import CSS (Prerequisite: <a href="//daneden.github.io/animate.css/">Animate.css</a>):</h5>
-                        <pre class="code"><code>&lt;link rel="stylesheet" href="bower_components/Morphist/dist/morphist.css"&gt;</code></pre>
+                        <h5>2a. Import CSS (Prerequisite: <a href="//daneden.github.io/animate.css/">Animate.css</a>):</h5>
+                        <pre><code class="language-markup">&lt;link rel="stylesheet" href="bower_components/Morphist/dist/morphist.css"&gt;</code></pre>
 
-                        <h5>Import JS (Prerequisite: <a href="//jquery.com">jQuery</a>):</h5>
-                        <pre class="code"><code>&lt;script src="bower_components/Morphist/dist/morphist.min.js"&gt;&lt;script&gt;</code></pre>
+                        <h5>2b. Import JS (Prerequisite: <a href="//jquery.com">jQuery</a>):</h5>
+                        <pre><code class="language-markup">&lt;script src="bower_components/Morphist/dist/morphist.min.js"&gt;&lt;script&gt;</code></pre>
                     </div>
                 </div>
                 <div class="pure-u-1 pure-u-md-1-2">
                     <div class="box">
                         <h2 class="block-title">Usage</h2>
 
-                        <h5>HTML:</h5>
-                        <pre class="code"><code>I am a...
+                        <h5>3. HTML:</h5>
+                        <pre><code class="language-markup">I am a...
 &lt;ul id=&quot;js-rotating&quot;&gt;
     &lt;li&gt;So Simple&lt;/li&gt;
     &lt;li&gt;Very Doge&lt;/li&gt;
@@ -75,8 +116,8 @@
 &lt;/ul&gt;
 ...child object rotator.</code></pre>
 
-                        <h5>Initiate (JS):</h5>
-                        <pre class="code"><code>$('#js-rotating').Morphist({
+                        <h5>4. Initiate and <a href="//github.com/MrSaints/Morphist#options" title="Morphist's options documentation">customise</a> (JS):</h5>
+                        <pre><code class="language-javascript">$(&quot;#js-rotating&quot;).Morphist({
     // Animation type (refer to Animate.css for a list of available animations)
     animateIn: &quot;tada&quot;,
     animateOut: &quot;bounceOut&quot;,
@@ -104,24 +145,6 @@
         </footer>
 
         <script>
-            Modernizr.load([
-                {
-                    load: '//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js',
-                    complete: function () {
-                        if (!window.jQuery) {
-                            Modernizr.load('assets/js/jquery.js');
-                        }
-                    }
-                },
-                {
-                    load: [
-                        '//cdn.jsdelivr.net/momentjs/2.6.0/moment.min.js',
-                        'assets/js/morphist.js',
-                        'assets/js/twitter.js'
-                    ]
-                }
-            ]);
-
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
             m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
