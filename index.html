@@ -49,8 +49,11 @@
                                 $tweets += '<h4 class="twitter-posted">' + moment(new Date(data[i].created_at)).fromNow() + '</h4></li>';
                             };
                             $objects.html($tweets).Morphist({
+                                // The entrance animation type (In).
                                 animateIn: "fadeInLeft",
+                                // The exit animation type (Out). Refer to Animate.css for a list of available animations.
                                 animateOut: "lightSpeedOut",
+                                // The delay between the changing of each object in milliseconds.
                                 speed: 3500
                             });
                         });
@@ -125,10 +128,11 @@
 
                         <h5>4. Initiate and <a href="//github.com/MrSaints/Morphist#options" title="Morphist's options documentation">customise</a> (JS):</h5>
                         <pre><code class="language-javascript">$(&quot;#js-rotating&quot;).Morphist({
-    // Animation type (refer to Animate.css for a list of available animations)
+    // The entrance animation type (In).
     animateIn: &quot;tada&quot;,
+    // The exit animation type (Out). Refer to Animate.css for a list of available animations.
     animateOut: &quot;bounceOut&quot;,
-    // The delay between each child object
+    // The delay between the changing of each object in milliseconds.
     speed: 2000
 });</code></pre>
                     </div>
