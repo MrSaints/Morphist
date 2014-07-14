@@ -46,7 +46,7 @@
                             $tweets = '';
                             for (var i = data.length - 1; i >= 0; i--) {
                                 $tweets += '<li><h3 class="twitter-tweet">' + twttr.txt.autoLinkWithJSON(data[i].text, data[i].entities) + '</h3>';
-                                $tweets += '<h4 class="twitter-posted">' + moment(data[i].created_at).fromNow() + '</h4></li>';
+                                $tweets += '<h4 class="twitter-posted">' + moment(new Date(data[i].created_at)).fromNow() + '</h4></li>';
                             };
                             $objects.html($tweets).Morphist({
                                 animateIn: "fadeInLeft",
