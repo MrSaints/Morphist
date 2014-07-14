@@ -1,28 +1,30 @@
 Morphist
 ========
 
-A simple jQuery slider / slideshow / carousel plugin for child objects powered by Animate.css and inspired by a Dota 2 hero, Morphling. 
-It is a spin-off project of [Morphext](//github.com/MrSaints/Morphext).
+A simple jQuery slider / slideshow / carousel plugin for child objects powered by [Animate.css][animatecss] and inspired by a Dota 2 hero, Morphling.
 
-[Website / Demo](http://morphist.fyianlai.com/)
+It cycles through an element's [child] objects containing any content (i.e. images, text, etc) in quick succession and it is a great tool for displaying tweets from Twitter or items from other feeds.
+It is a spin-off project of [Morphext](//github.com/MrSaints/Morphext) (a simple text rotator).
+
+[Website / Demo][website]
 
 
 Install
 -------
 
-Download from the [project page](//github.com/MrSaints/Morphist/releases).
+Download from the [project page][downloads].
 
-Install with [Bower](http://bower.io/): `bower install --save Morphist`
+Install with [Bower][bower]: `bower install --save Morphist`
 
 
 Usage
 -----
 
-1. Import the latest Animate.css and jQuery library into your HTML.
+1. Import the latest [Animate.css][animatecss] and [jQuery][jquery] library into your HTML.
 
 2. Import `morphist.css` and include `morphist.min.js` in your HTML document.
 
-3. Encapsulate your rotating objects (children) in an element (parent):
+3. Encapsulate your rotating objects (children, e.g. list item) in an element (parent, e.g. unordered list):
 
         I am a...
         <ul id="js-rotating">
@@ -35,21 +37,62 @@ Usage
 
 4. Trigger the plugin by calling Morphist() on the element (parent) containing the rotating objects (children):
 
-        $("#js-rotating").Morphist({
-            // Animation type (refer to Animate.css for a list of available animations)
-            animateIn: 'tada',
-            animateOut: 'bounceOut',
-            // The delay between each child object
-            speed: 2000
-        });
+        $("#js-rotating").Morphist();
+
+A demo titled `index.html` is included in this repository. Open it to see the end-result.
+
+
+Options
+-------
+
+Morphist exposes the following options to alter the behaviour of the plugin:
+
+Option | Type | Default | Description
+--- | --- | --- | ---
+animateIn | `string` | `bounceIn` | The entrance animation type (In).
+animateOut | `string` | `rollOut` | The exit animation type (Out). Refer to [Animate.css][animatecss] for a list of available animations.
+speed | `int` | `2000` | The delay between the changing of each object in milliseconds.
+
+They may be used like so:
+
+    $("#js-rotating").Morphist({
+        animateIn: "fadeIn", // Overrides default "bounceIn"
+        animateOut: "zoomOut", // Overrides default "rollOut"
+        speed: 3000 // Overrides default 2000
+    });
+
+The plugin relies heavily on [Animate.css][animatecss] for its [smooth, high performance animations](http://www.html5rocks.com/en/tutorials/speed/high-performance-animations/) to transition between each object. Thus, the default animation speed (different from the interval between each object as described above) may be altered via CSS:
+
+    #yourElement, .yourClass {
+        /* Overrides Animate.css 1s duration */
+        -vendor-animation-duration: 3s;
+    }
+
+
+"Issues"
+----------
+
+Refer to [Morphext's "Issues"](https://github.com/MrSaints/Morphext#issues).
+
+Should you encounter any problems or require assistance with this plugin, simply open a GitHub issue in this repository or you may contact [me via Twitter][twitter].
 
 
 Prerequisites
 -------------
-- [jQuery](http://www.jquery.com/)
-- [Animate.css](//daneden.github.io/animate.css/)
+
+- [jQuery][jquery]
+- [Animate.css][animatecss]
 
 
 License
 -------
+
 Morphist is licensed under the MIT license [(http://ian.mit-license.org/)](http://ian.mit-license.org/).
+
+  [website]: http://morphist.fyianlai.com/
+  [twitter]: //www.twitter.com/MrSaints
+  [downloads]: //github.com/MrSaints/Morphist/releases
+  
+  [bower]: http://bower.io/
+  [jquery]: //www.jquery.com/
+  [animatecss]: //daneden.github.io/animate.css/
