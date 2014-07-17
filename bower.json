@@ -1,7 +1,7 @@
 {
   "name": "Morphist",
-  "version": "1.1.0",
-  "description": "A simple jQuery slider / slideshow / carousel plugin for child objects powered by Animate.css and inspired by a Dota 2 hero, Morphling.",
+  "version": "1.1.1",
+  "description": "A simple, high-performance and cross-browser jQuery slider / slideshow / carousel plugin for child objects powered by Animate.css.",
   "authors": [
     "Ian Lai <ian@fyianlai.com>"
   ],
@@ -27,7 +27,7 @@
     "tests"
   ],
   "dependencies": {
-    "animate.css": "~3.1.1",
+    "animate.css": "~3.2.1",
     "jquery": "~2.1.1"
   }
 }
