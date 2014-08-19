@@ -1,5 +1,5 @@
 /*!
- * Morphist v1.0.0 - Text Rotating Plugin for jQuery
+ * Morphist v1.1.1 - Generic Rotating Plugin for jQuery
  * https://github.com/MrSaints/Morphist
  *
  * Built on jQuery Boilerplate
@@ -9,7 +9,12 @@
  * Released under the MIT license
  * http://ian.mit-license.org/
  */
-;(function ($, window, document, undefined) {
+
+/*eslint-env browser */
+/*global jQuery:false */
+/*eslint-disable no-underscore-dangle */
+
+(function ($) {
     var pluginName = "Morphist",
         defaults = {
             animateIn: "bounceIn",
@@ -28,13 +33,9 @@
 
     Plugin.prototype = {
         init: function () {
-            var $that = this;
             this.children = this.element.children();
-
-            this.element.addClass('morphist');
-
+            this.element.addClass("morphist");
             this.index = -1;
-
             this.cycle();
         },
         animate: function () {
@@ -43,7 +44,7 @@
             ++this.index;
             this.prev = this.index;
 
-            this.children.eq(this.index).addClass('animated ' + this.settings.animateIn);
+            this.children.eq(this.index).addClass("animated " + this.settings.animateIn);
 
             setTimeout(function () {
                 $that.cycle();
@@ -52,13 +53,14 @@
         cycle: function () {
             var $that = this;
 
-            if ((this.index + 1) === this.children.length)
+            if ((this.index + 1) === this.children.length) {
                 this.index = -1;
+            }
 
             if (typeof this.prev !== "undefined" && this.prev !== null) {
                 this.children.eq(this.prev)
                     .addClass(this.settings.animateOut)
-                    .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+                    .one("webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend", function() {
                         $(this).removeClass();
                         $that.animate();
                     });
@@ -76,4 +78,4 @@
             }
         });
     };
-})(jQuery, window, document);
+})(jQuery);
