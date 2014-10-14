@@ -1,5 +1,5 @@
 /*!
- * Morphist v1.1.1 - Generic Rotating Plugin for jQuery
+ * Morphist - Generic Rotating Plugin for jQuery
  * https://github.com/MrSaints/Morphist
  *
  * Built on jQuery Boilerplate
@@ -15,6 +15,8 @@
 /*eslint-disable no-underscore-dangle */
 
 (function ($) {
+    "use strict";
+
     var pluginName = "Morphist",
         defaults = {
             animateIn: "bounceIn",
@@ -59,6 +61,7 @@
 
             if (typeof this.prev !== "undefined" && this.prev !== null) {
                 this.children.eq(this.prev)
+                    .removeClass(this.settings.animateIn)
                     .addClass(this.settings.animateOut)
                     .one("webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend", function() {
                         $(this).removeClass();
