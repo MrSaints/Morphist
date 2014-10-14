@@ -1,6 +1,8 @@
 Morphist
 ========
 
+[![Dev Dependency Status](https://david-dm.org/MrSaints/Morphist/dev-status.svg?style=flat)](https://david-dm.org/MrSaints/Morphist#info=devDependencies)
+
 A simple, high-performance and cross-browser [jQuery][jquery] slider / slideshow / carousel plugin for child objects powered by [Animate.css][animatecss].
 
 It cycles through an element's [child] objects containing any content (i.e. images, text, etc) in quick succession and it is a great tool for displaying tweets from Twitter or items from other feeds.
