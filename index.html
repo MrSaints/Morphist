@@ -25,6 +25,14 @@
         <script src="//cdn.jsdelivr.net/modernizr/2.8.2/modernizr.min.js"></script>
 
         <script>
+            var setListeners = function (plugin) {
+                $("#js-changeIn").change(function () {
+                    plugin.settings.animateIn = $(this).val();
+                });
+                $("#js-changeOut").change(function () {
+                    plugin.settings.animateOut = $(this).val();
+                });
+            }
             Modernizr.load([
                 {
                     load: '//cdn.jsdelivr.net/jquery/2.1.1/jquery.min.js',
@@ -48,7 +56,7 @@
                                 $tweets += '<li><h3 class="twitter-tweet">' + twttr.txt.autoLinkWithJSON(data[i].text, data[i].entities) + '</h3>';
                                 $tweets += '<h4 class="twitter-posted">' + moment(new Date(data[i].created_at)).fromNow() + '</h4></li>';
                             };
-                            $objects.html($tweets).Morphist({
+                            var morphist = $objects.html($tweets).Morphist({
                                 // The entrance animation type (In).
                                 animateIn: "fadeInLeft",
                                 // The exit animation type (Out). Refer to Animate.css for a list of available animations.
@@ -56,12 +64,7 @@
                                 // The delay between the changing of each object in milliseconds.
                                 speed: 3500
                             });
-                        });
-                        $("#js-changeIn").change(function () {
-                             $objects.Morphist('setInAnimation', $(this).val())
-                        });
-                        $("#js-changeOut").change(function () {
-                             $objects.Morphist('setOutAnimation', $(this).val())
+                            setListeners(morphist.data("plugin_Morphist"));
                         });
                     }
                 },
