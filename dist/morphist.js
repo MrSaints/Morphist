@@ -5,7 +5,7 @@
  * Built on jQuery Boilerplate
  * http://jqueryboilerplate.com/
  *
- * Copyright 2014 Ian Lai and other contributors
+ * Copyright 2015 Ian Lai and other contributors
  * Released under the MIT license
  * http://ian.mit-license.org/
  */
@@ -21,7 +21,8 @@
         defaults = {
             animateIn: "bounceIn",
             animateOut: "rollOut",
-            speed: 2000
+            speed: 2000,
+            complete: $.noop
         };
 
     function Plugin (element, options) {
@@ -29,48 +30,49 @@
 
         this.settings = $.extend({}, defaults, options);
         this._defaults = defaults;
-        this._name = pluginName;
-        this.init();
+        this._init();
     }
 
     Plugin.prototype = {
-        init: function () {
+        _init: function () {
             this.children = this.element.children();
             this.element.addClass("morphist");
-            this.index = -1;
+
+            this.index = 0;
             this.cycle();
-        },
-        animate: function () {
-            var $that = this;
-
-            ++this.index;
-            this.prev = this.index;
-
-            this.children.eq(this.index).addClass("animated " + this.settings.animateIn);
-
-            setTimeout(function () {
-                $that.cycle();
-            }, this.settings.speed);
         },
         cycle: function () {
             var $that = this;
+            this._animateIn();
 
-            if ((this.index + 1) === this.children.length) {
-                this.index = -1;
-            }
-
-            if (typeof this.prev !== "undefined" && this.prev !== null) {
-                this.children.eq(this.prev)
-                    .removeClass(this.settings.animateIn)
-                    .addClass(this.settings.animateOut)
-                    .one("webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend", function() {
+            this._timeout = setTimeout(function () {
+                $that._animateOut()
+                    .one("webkitAnimationEnd mozAnimationEnd MSAnimationEnd" +
+                        "oanimationend animationend", function () {
                         $(this).removeClass();
-                        $that.animate();
+                        if ($that.index + 1 === $that.children.length) {
+                            $that.index = -1;
+                        }
+                        ++$that.index;
+                        $that.cycle();
                     });
-                return;
-            }
+            }, this.settings.speed);
 
-            this.animate();
+            if ($.isFunction(this.settings.complete)) {
+                this.settings.complete.call(this);
+            }
+        },
+        stop: function () {
+            clearTimeout(this._timeout);
+        },
+        _animateIn: function () {
+            return this.children.eq(this.index)
+                        .addClass("animated " + this.settings.animateIn);
+        },
+        _animateOut: function () {
+            return this.children.eq(this.index)
+                        .removeClass()
+                        .addClass("animated " + this.settings.animateOut);
         }
     };
 
