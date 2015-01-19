@@ -73,7 +73,7 @@
             var element = this.children.eq(this.index);
             element.removeClass();
             if (this.settings.animateIn === this.settings.animateOut) {
-                element[0].offsetWidth = element[0].offsetWidth;
+                element[0].offsetWidth;
             }
             return element.addClass("animated " + this.settings.animateOut);
         }
