@@ -73,7 +73,9 @@
             var element = this.children.eq(this.index);
             element.removeClass();
             if (this.settings.animateIn === this.settings.animateOut) {
+                /*eslint-disable */
                 element[0].offsetWidth;
+                /*eslint-enable */
             }
             return element.addClass("animated " + this.settings.animateOut);
         }
