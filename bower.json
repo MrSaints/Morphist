@@ -28,6 +28,6 @@
   ],
   "dependencies": {
     "animate.css": "~3.2.5",
-    "jquery": "~2.1.1"
+    "jquery": "~2.1.3"
   }
 }
