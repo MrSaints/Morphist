@@ -28,18 +28,22 @@ Usage
 
 3. Encapsulate your rotating objects (children, e.g. list item) in an element (parent, e.g. unordered list):
 
-        I am a...
-        <ul id="js-rotating">
-            <li>So Simple</li>
-            <li>Very Doge</li>
-            <li>Much Wow</li>
-            <li>Such Cool</li>
-        </ul>
-        ...child object rotator.
+    ```html
+    I am a...
+    <ul id="js-rotating">
+        <li>So Simple</li>
+        <li>Very Doge</li>
+        <li>Much Wow</li>
+        <li>Such Cool</li>
+    </ul>
+    ...child object rotator.
+    ```
 
 4. Trigger the plugin by calling Morphist() on the element (parent) containing the rotating objects (children):
 
-        $("#js-rotating").Morphist();
+    ```js
+    $("#js-rotating").Morphist();
+    ```
 
 A demo titled `index.html` is included in this repository. Open it to see the end-result.
 
@@ -54,21 +58,29 @@ Option | Type | Default | Description
 animateIn | `string` | `bounceIn` | The entrance animation type (In).
 animateOut | `string` | `rollOut` | The exit animation type (Out). Refer to [Animate.css][animatecss] for a list of available animations.
 speed | `int` | `2000` | The delay between the changing of each object in milliseconds.
+complete | `object Function` | `null` | A callback that is executed after an item is animated in.
 
 They may be used like so:
 
-    $("#js-rotating").Morphist({
-        animateIn: "fadeIn", // Overrides default "bounceIn"
-        animateOut: "zoomOut", // Overrides default "rollOut"
-        speed: 3000 // Overrides default 2000
-    });
+```js
+$("#js-rotating").Morphist({
+    animateIn: "fadeIn", // Overrides default "bounceIn"
+    animateOut: "zoomOut", // Overrides default "rollOut"
+    speed: 3000, // Overrides default 2000
+    complete: function () {
+        // Overrides default empty function
+    }
+});
+```
 
 The plugin relies heavily on [Animate.css][animatecss] for its [smooth, high performance animations](http://www.html5rocks.com/en/tutorials/speed/high-performance-animations/) to transition between each object. Thus, the default animation speed (different from the interval between each object as described above) may be altered via CSS:
 
-    #yourElement, .yourClass {
-        /* Overrides Animate.css 1s duration */
-        -vendor-animation-duration: 3s;
-    }
+```css
+#yourElement, .yourClass {
+    /* Overrides Animate.css 1s duration */
+    -vendor-animation-duration: 3s;
+}
+```
 
 
 "Issues"
@@ -92,9 +104,9 @@ License
 Morphist is licensed under the MIT license [(http://ian.mit-license.org/)](http://ian.mit-license.org/).
 
   [website]: http://morphist.fyianlai.com/
-  [twitter]: //www.twitter.com/MrSaints
-  [downloads]: //github.com/MrSaints/Morphist/releases
-  
+  [twitter]: https://www.twitter.com/MrSaints
+  [downloads]: https://github.com/MrSaints/Morphist/releases
+
   [bower]: http://bower.io/
-  [jquery]: //www.jquery.com/
+  [jquery]: https://www.jquery.com/
   [animatecss]: //daneden.github.io/animate.css/
