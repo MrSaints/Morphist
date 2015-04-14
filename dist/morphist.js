@@ -40,6 +40,7 @@
             this.element.addClass("morphist");
 
             this.index = 0;
+            this.indexes = [];
             this.loop();
         },
         loop: function () {
@@ -72,11 +73,23 @@
         },
         _next: function () {
             if (this.settings.random) {
-                var randomIndex = ~~(Math.random() * this.children.length);
-                this.index = randomIndex;
+                if (!this.indexes.length) {
+                    this.indexes = this._getRangeArray(0, this.children.length);
+                }
+                var randomIndex = this._getRandomIndex(this.indexes.length);
+                this.index = this.indexes.splice(randomIndex, 1);
             } else {
                 this.index = ++this.index % this.children.length;
             }
+        },
+        _getRangeArray: function (min, max) {
+            for (var i = min, range = []; i < max; i++) {
+                range[i] = i;
+            }
+            return range;
+        },
+        _getRandomIndex: function (n) {
+            return ~~(Math.random() * n);
         },
         _animateIn: function () {
             return this.children.eq(this.index)
