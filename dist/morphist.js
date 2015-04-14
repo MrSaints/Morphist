@@ -39,35 +39,39 @@
             this.element.addClass("morphist");
 
             this.index = 0;
-            this.cycle();
+            this.loop();
         },
-        cycle: function () {
+        loop: function () {
             var $that = this;
-            this._animateIn();
 
-            this._timeout = setTimeout(function () {
-                $that._animateOut()
-                    .one("webkitAnimationEnd mozAnimationEnd MSAnimationEnd" +
-                        "oanimationend animationend", function () {
-                        $(this).removeClass();
-                        if ($that.index + 1 === $that.children.length) {
-                            $that.index = -1;
-                        }
-                        ++$that.index;
-                        $that.cycle();
-                    });
+            this._animateIn();
+            this.timeout = setTimeout(function () {
+                var elem = $that._animateOut();
+                $that._attachOutListener(elem);
             }, this.settings.speed);
 
             if ($.isFunction(this.settings.complete)) {
                 this.settings.complete.call(this);
             }
         },
+        _attachOutListener: function ($elem) {
+            var $that = this;
+
+            $elem.one("webkitAnimationEnd mozAnimationEnd MSAnimationEnd" +
+                        "oanimationend animationend", function () {
+                if ($elem.hasClass("mis-out")) {
+                    $elem.removeClass();
+                    $that.index = ++$that.index % $that.children.length;
+                    $that.loop();
+                }
+            });
+        },
         stop: function () {
-            clearTimeout(this._timeout);
+            clearTimeout(this.timeout);
         },
         _animateIn: function () {
             return this.children.eq(this.index)
-                        .addClass("animated " + this.settings.animateIn);
+                        .addClass("animated mis-in " + this.settings.animateIn);
         },
         _animateOut: function () {
             var element = this.children.eq(this.index);
@@ -77,7 +81,7 @@
                 element[0].offsetWidth;
                 /*eslint-enable */
             }
-            return element.addClass("animated " + this.settings.animateOut);
+            return element.addClass("animated mis-out " + this.settings.animateOut);
         }
     };
 
