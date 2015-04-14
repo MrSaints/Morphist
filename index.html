@@ -119,7 +119,7 @@
                     <div class="box">
                         <h2 class="block-title">Usage</h2>
 
-                        <h5>3. HTML:</h5>
+                        <h5>3. HTML <a href="https://github.com/MrSaints/Morphist/blob/master/index.html">(Example)</a>:</h5>
                         <pre><code class="language-markup">I am a...
 &lt;ul id=&quot;js-rotating&quot;&gt;
     &lt;li&gt;So Simple&lt;/li&gt;
@@ -136,7 +136,10 @@
     // The exit animation type (Out). Refer to Animate.css for a list of available animations.
     animateOut: &quot;bounceOut&quot;,
     // The delay between the changing of each object in milliseconds.
-    speed: 2000
+    speed: 2000,
+    complete: function () {
+        // Called after the entrance animation is executed
+    }
 });</code></pre>
                     </div>
                 </div>
