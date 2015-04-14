@@ -1,6 +1,6 @@
 {
   "name": "Morphist",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "A simple, high-performance and cross-browser jQuery slider / slideshow / carousel plugin for child objects powered by Animate.css.",
   "main": "Gruntfile.coffee",
   "private": true,
@@ -24,7 +24,7 @@
   "homepage": "https://github.com/MrSaints/Morphist",
   "devDependencies": {
     "grunt": "^0.4.5",
-    "grunt-contrib-uglify": "^0.7.0",
-    "grunt-eslint": "^5.1.0"
+    "grunt-contrib-uglify": "^0.9.1",
+    "grunt-eslint": "^11.0.0"
   }
 }
