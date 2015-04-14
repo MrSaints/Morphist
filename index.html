@@ -17,12 +17,12 @@
             <link rel="stylesheet" href="//yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
         <!--<![endif]-->
 
-        <link href="//cdn.jsdelivr.net/animatecss/3.1.1/animate.min.css" rel="stylesheet">
+        <link href="//cdn.jsdelivr.net/animatecss/3.2.6/animate.min.css" rel="stylesheet">
         <link href="assets/css/morphist.css" rel="stylesheet">
         <link href="assets/css/style.css" rel="stylesheet">
         <link rel="shortcut icon" href="favicon.ico">
 
-        <script src="//cdn.jsdelivr.net/modernizr/2.8.2/modernizr.min.js"></script>
+        <script src="//cdn.jsdelivr.net/modernizr/2.8.3/modernizr.min.js"></script>
 
         <script>
             var setListeners = function (plugin) {
@@ -35,7 +35,7 @@
             }
             Modernizr.load([
                 {
-                    load: '//cdn.jsdelivr.net/jquery/2.1.1/jquery.min.js',
+                    load: '//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js',
                     complete: function () {
                         if (!window.jQuery) {
                             Modernizr.load('assets/js/jquery.js');
@@ -44,7 +44,7 @@
                 },
                 {
                     load: [
-                        '//cdn.jsdelivr.net/momentjs/2.7.0/moment.min.js',
+                        '//cdn.jsdelivr.net/momentjs/2.9.0/moment.min.js',
                         'assets/js/morphist.js',
                         'assets/js/twitter.js'
                     ],
