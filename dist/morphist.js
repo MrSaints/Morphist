@@ -22,6 +22,7 @@
             animateIn: "bounceIn",
             animateOut: "rollOut",
             speed: 2000,
+            random: true,
             complete: $.noop
         };
 
@@ -61,13 +62,21 @@
                         "oanimationend animationend", function () {
                 if ($elem.hasClass("mis-out")) {
                     $elem.removeClass();
-                    $that.index = ++$that.index % $that.children.length;
+                    $that._next();
                     $that.loop();
                 }
             });
         },
         stop: function () {
             clearTimeout(this.timeout);
+        },
+        _next: function () {
+            if (this.settings.random) {
+                var randomIndex = ~~(Math.random() * this.children.length);
+                this.index = randomIndex;
+            } else {
+                this.index = ++this.index % this.children.length;
+            }
         },
         _animateIn: function () {
             return this.children.eq(this.index)
