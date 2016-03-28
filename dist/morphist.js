@@ -35,53 +35,63 @@
 
     Plugin.prototype = {
         _init: function () {
+            this._animationEnd = "webkitAnimationEnd mozAnimationEnd " +
+                                "MSAnimationEnd oanimationend animationend";
+
             this.children = this.element.children();
             this.element.addClass("morphist");
 
             this.index = 0;
             this.loop();
         },
-        loop: function () {
-            var $that = this;
-
-            this._animateIn();
-            this.timeout = setTimeout(function () {
-                var elem = $that._animateOut();
-                $that._attachOutListener(elem);
-            }, this.settings.speed);
-
-            if ($.isFunction(this.settings.complete)) {
-                this.settings.complete.call(this);
+        _shouldForceReflow: function ($elem) {
+            if (this.settings.animateIn === this.settings.animateOut) {
+                /*eslint-disable */
+                $elem[0].offsetWidth;
+                /*eslint-enable */
             }
         },
-        _attachOutListener: function ($elem) {
+        _animate: function ($elem, $classes, $cb) {
+            $elem.addClass("animated " + $classes)
+                .one(this._animationEnd, function () {
+                    $cb();
+                });
+        },
+        loop: function () {
             var $that = this;
+            var $current = this.children.eq(this.index);
 
-            $elem.one("webkitAnimationEnd mozAnimationEnd MSAnimationEnd" +
-                        "oanimationend animationend", function () {
-                if ($elem.hasClass("mis-out")) {
-                    $elem.removeClass();
-                    $that.index = ++$that.index % $that.children.length;
-                    $that.loop();
+            var $animateOut = function () {
+                $that.timeout = setTimeout(function () {
+                    $current.removeClass();
+                    $that._shouldForceReflow($current);
+
+                    $that._animate(
+                        $current,
+                        "mis-out " + $that.settings.animateOut,
+                        function () {
+                            $that.index = ++$that.index % $that.children.length;
+                            $current.removeClass();
+                            $that.loop();
+                        }
+                    );
+                }, $that.settings.speed);
+            };
+
+            this._animate(
+                $current,
+                "mis-in " + this.settings.animateIn,
+                function () {
+                    $animateOut();
+
+                    if ($.isFunction($that.settings.complete)) {
+                        $that.settings.complete.call($that);
+                    }
                 }
-            });
+            );
         },
         stop: function () {
             clearTimeout(this.timeout);
-        },
-        _animateIn: function () {
-            return this.children.eq(this.index)
-                        .addClass("animated mis-in " + this.settings.animateIn);
-        },
-        _animateOut: function () {
-            var element = this.children.eq(this.index);
-            element.removeClass();
-            if (this.settings.animateIn === this.settings.animateOut) {
-                /*eslint-disable */
-                element[0].offsetWidth;
-                /*eslint-enable */
-            }
-            return element.addClass("animated mis-out " + this.settings.animateOut);
         }
     };
 
