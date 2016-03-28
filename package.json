@@ -12,13 +12,8 @@
     "type": "git",
     "url": "git://github.com/MrSaints/Morphist.git"
   },
-  "author": "Ian Lai <ian@fyianlai.com>",
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "http://ian.mit-license.org/"
-    }
-  ],
+  "author": "Ian Lai <os@fyianlai.com>",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/MrSaints/Morphist/issues"
   },

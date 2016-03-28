@@ -5,7 +5,7 @@
  * Built on jQuery Boilerplate
  * http://jqueryboilerplate.com/
  *
- * Copyright 2015 Ian Lai and other contributors
+ * Copyright 2016 Ian Lai and other contributors
  * Released under the MIT license
  * http://ian.mit-license.org/
  */
