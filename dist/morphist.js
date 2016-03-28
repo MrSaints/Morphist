@@ -53,9 +53,7 @@
         },
         _animate: function ($elem, $classes, $cb) {
             $elem.addClass("animated " + $classes)
-                .one(this._animationEnd, function () {
-                    $cb();
-                });
+                .one(this._animationEnd, $cb);
         },
         loop: function () {
             var $that = this;
