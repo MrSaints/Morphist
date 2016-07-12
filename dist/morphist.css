@@ -1,7 +1,3 @@
-.morphist > * {
+.morphist > *:not(.animated) {
     display: none;
-}
-
-.morphist > .animated {
-    display: inline-block;
 }
