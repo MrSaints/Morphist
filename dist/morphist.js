@@ -60,7 +60,7 @@
             $elem.one("webkitAnimationEnd mozAnimationEnd MSAnimationEnd" +
                         "oanimationend animationend", function () {
                 if ($elem.hasClass("mis-out")) {
-                    $elem.removeClass();
+                    $elem.removeClass("animated mis-out " + $that.settings.animateOut);
                     $that.index = ++$that.index % $that.children.length;
                     $that.loop();
                 }
@@ -75,7 +75,7 @@
         },
         _animateOut: function () {
             var element = this.children.eq(this.index);
-            element.removeClass();
+            element.removeClass("animated mis-in " + this.settings.animateIn);
             if (this.settings.animateIn === this.settings.animateOut) {
                 /*eslint-disable */
                 element[0].offsetWidth;
