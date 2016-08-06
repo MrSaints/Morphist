@@ -1,7 +1,13 @@
-.morphist > * {
+.morphist > *:not(.animated) {
     display: none;
 }
 
-.morphist > .animated {
-    display: inline-block;
+.morphist.sync {
+	position: relative;
+	overflow: hidden;
+}
+.morphist.sync > * {
+	position: absolute;
+	width: 100%;
+	height: 100%;
 }

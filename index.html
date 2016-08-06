@@ -8,12 +8,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="bower_components/animate.css/animate.min.css">
     <link rel="stylesheet" href="dist/morphist.css">
+        <style type="text/css">
+.morphist.sync {
+	padding: 0;
+}
+.morphist.sync li {
+	color: white;
+}
+.morphist.sync li:nth-child(odd) {
+	background-color: red;
+}
+.morphist.sync li:nth-child(even) {
+	background-color: blue;
+}
+</style>
 </head>
 
 <body>
     <div style="text-align:center">
         I am a...
         <ul id="js-rotating">
+            <li>So Simple</li>
+            <li>Very Doge</li>
+            <li>Much Wow</li>
+            <li>Such Cool</li>
+        </ul>
+        <ul id="js-rotating-sync">
             <li>So Simple</li>
             <li>Very Doge</li>
             <li>Much Wow</li>
@@ -33,6 +53,11 @@
             complete: function () {
                 console.log("This is called after an item is animated in! Current child index: " + this.index);
             }
+        });
+        $("#js-rotating-sync").Morphist({
+            animateIn: "slideInRight",
+            animateOut: "slideOutLeft",
+			sync: true
         });
     </script>
 </body>

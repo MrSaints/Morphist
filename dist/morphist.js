@@ -22,6 +22,7 @@
             animateIn: "bounceIn",
             animateOut: "rollOut",
             speed: 2000,
+			sync: false,
             complete: $.noop
         };
 
@@ -39,6 +40,9 @@
                                 "MSAnimationEnd oanimationend animationend";
 
             this.children = this.element.children();
+			if (this.settings.sync && this.children[0]) {
+				this.element.addClass("sync").height(this.children[0].clientHeight + "px");
+			}
             this.element.addClass("morphist");
 
             this.index = 0;
@@ -64,15 +68,16 @@
                     $current.removeClass();
                     $that._shouldForceReflow($current);
 
+					$that.index = ++$that.index % $that.children.length;
                     $that._animate(
                         $current,
                         "mis-out " + $that.settings.animateOut,
                         function () {
-                            $that.index = ++$that.index % $that.children.length;
                             $current.removeClass();
-                            $that.loop();
+                            if (!$that.settings.sync) $that.loop();
                         }
                     );
+					if ($that.settings.sync) $that.loop();
                 }, $that.settings.speed);
             };
 
